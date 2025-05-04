@@ -1,9 +1,12 @@
 class ProvidersController < ApplicationController
 
   def index
-    providers = Provider.all
+    @providers = Provider.all
 
-    render json: prettify(providers)
+    respond_to do | format |
+      format.json { render json: { data: prettify(@providers) }, status: :ok }
+      format.html
+    end
   end
 
   private

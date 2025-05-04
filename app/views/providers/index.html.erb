@@ -1,0 +1,22 @@
+<!-- app/views/providers/index.html.erb -->
+<div class="container mx-auto max-w-5xl p-6">
+  <h1 class="text-3xl font-bold mb-8 text-gray-800">
+    Supported Weather Providers
+  </h1>
+
+  <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    <% @providers.each do |provider| %>
+      <div class="rounded-2xl shadow-sm bg-white p-6 flex flex-col border">
+        <!-- Provider name -->
+        <h2 class="text-xl font-semibold mb-2 text-indigo-600">
+          <%= provider.name %>
+        </h2>
+
+        <!-- (Optional) base URL -->
+        <p class="text-gray-600 break-all text-sm">
+          <%= provider.base_url %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>
