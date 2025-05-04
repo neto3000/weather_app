@@ -11,4 +11,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  get  "/weather_providers", to: "providers#index"   # bonus search
 end
