@@ -9,7 +9,7 @@ class WeatherController < ApplicationController
   end
 
   def show
-    weather_reading = @weather_service.fetch(weather_service_params)
+    weather_reading = @weather_service.fetch
 
     render json: JSON.parse(weather_reading.payload), status: :ok
   end
@@ -17,7 +17,7 @@ class WeatherController < ApplicationController
   private
 
   def inti_weather_service
-    @weather_service = WeatherService.new(@provider)
+    @weather_service = WeatherService.new(@provider, weather_service_params)
   end
 
   def inti_weather_provider
