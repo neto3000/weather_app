@@ -70,3 +70,14 @@ gem "faraday"      # terse HTTP client
 gem "tailwindcss-ruby", "~> 4.1"
 
 gem "tailwindcss-rails", "~> 4.2"
+
+
+gem 'activeadmin'
+
+# Plus integrations with:
+gem 'devise'
+gem 'cancancan'
+gem 'draper'
+gem 'pundit'
+
+gem "dartsass-rails", "~> 0.5.1"

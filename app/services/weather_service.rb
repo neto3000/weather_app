@@ -35,7 +35,6 @@ class WeatherService
   def save_update_weather_reading(response)
     WeatherReading.create!(
         provider:   @provider,
-        query_type: nil,
         lat:        @lat,
         lon:        @lon,
         city:       @city ,
