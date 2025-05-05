@@ -24,7 +24,7 @@ class WeatherService
       if cached.fetched_at > CACHE_TIME.ago
         cached
       else
-        update_expired_weather_reading(expired_weather_reading)
+        update_expired_weather_reading(cached)
       end
     else
       create_weather_reading
