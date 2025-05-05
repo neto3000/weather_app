@@ -37,6 +37,7 @@ class WeatherService
     response = fetch_weather
 
     expired_weather_reading.update!(lat: @lat, lon: @lon, payload: response.body, fetched_at: Time.current )
+    expired_weather_reading
   end
 
   def create_weather_reading
