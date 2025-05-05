@@ -3,7 +3,6 @@
 Weather app 
 
 
-
 #### Usage
 
 API - JSON responses
@@ -32,22 +31,11 @@ https://sandbox.promptgenie.io/weather_providers
 ```
 
 
-Things you may want to cover:
+Stack:
 
-* Ruby version
+ruby 3.4.3
 
-* System dependencies
+Rails 8.0.2
 
-* Configuration
+SQLite
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

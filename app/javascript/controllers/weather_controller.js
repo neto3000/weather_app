@@ -3,11 +3,22 @@ const kelvinToF = k => Math.round((k - 273.15) * 9 / 5 + 32);
 const toLocalTime = unix =>
   new Date(unix * 1000).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
+const debounce = (fn, delay = 300) => {
+  let t
+  return function (...args) {
+    clearTimeout(t)
+    const context = this
+    t = setTimeout(() => fn.apply(context, args), delay)
+  }
+}
 
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["providerSelect", "cityForm", "city", "state"]
+  static targets = [
+    "providerSelect",
+    "search", "suggestions",
+  ]
 
   connect() {
     this.providers = JSON.parse(this.element.dataset.weatherProviders)
@@ -89,4 +100,35 @@ export default class extends Controller {
       </div>
     `
   }
+
+  // --- autocomplete: on-type
+  type = debounce(async function () {
+    const q = this.searchTarget.value.trim()
+    if (q.length < 2) { this.hideSuggestions(); return }
+
+    const res  = await fetch(`/cities/search?q=${encodeURIComponent(q)}`)
+    const list = await res.json()          // [{ name, state, lat, lon }, …]
+
+    if (list.length === 0) { this.hideSuggestions(); return }
+
+    this.suggestionsTarget.innerHTML = list.map(city => `
+    <li class="px-4 py-2 hover:bg-indigo-50 cursor-pointer"
+        data-action="click->weather#pick"
+        data-city='${JSON.stringify(city)}'>
+      ${city.name}, ${city.state}
+    </li>
+  `).join("")
+    this.suggestionsTarget.classList.remove("hidden")
+  })
+
+// --- autocomplete: on-pick
+  pick(event) {
+    const city = JSON.parse(event.currentTarget.dataset.city)
+    this.searchTarget.value = `${city.name}, ${city.state}`
+    this.hideSuggestions()
+    this.fetchAndRender({ lat: city.lat, lon: city.lon })
+  }
+
+// --- helper
+  hideSuggestions() { this.suggestionsTarget.classList.add("hidden") }
 }

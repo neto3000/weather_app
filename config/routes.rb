@@ -16,4 +16,6 @@ Rails.application.routes.draw do
 
   get  "/weather_providers", to: "providers#index"
   get "/weather/search", to: "weather#show"
+
+  get "/cities/search", to: "cities#search"
 end
