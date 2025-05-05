@@ -20,11 +20,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_04_025936) do
 
   create_table "weather_readings", force: :cascade do |t|
     t.integer "provider_id", null: false
-    t.string "query_type", null: false
     t.float "lat"
     t.float "lon"
     t.string "city"
     t.string "state"
+    t.string "country"
+    t.string "zip_code"
     t.text "payload", default: "{}", null: false
     t.datetime "fetched_at", null: false
     t.datetime "created_at", null: false

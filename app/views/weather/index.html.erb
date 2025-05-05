@@ -1,0 +1,11 @@
+<div data-controller="weather" data-weather-providers="<%= Provider.all.to_json %>">
+  <select data-weather-target="providerSelect"></select>
+
+  <form data-weather-target="cityForm" data-action="submit->weather#citySearch" class="mt-4">
+    <input placeholder="City"  data-weather-target="city"  class="border p-1">
+    <input placeholder="State" data-weather-target="state" class="border p-1 w-20">
+    <button>Search</button>
+  </form>
+
+  <div id="weather-card" class="mt-6"></div>
+</div>

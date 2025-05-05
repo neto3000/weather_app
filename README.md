@@ -1,7 +1,32 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Weather app 
+
+
+
+#### Usage
+
+API
+
+GET a list of all the supported weather providers
+```
+https://sandbox.promptgenie.io/weather_providers.json 
+```
+
+```
+https://sandbox.promptgenie.io/weather_providers
+```
+
+GET a weather base on city and state.
+
+```
+http://localhost:3000/?city=merida 
+
+
+weather/search.json?city=merida&country=MX
+```
+
+
 
 Things you may want to cover:
 
