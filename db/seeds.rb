@@ -12,3 +12,4 @@ Provider.create!(
     name:        "OpenWeatherMap",
     base_url:    "https://api.openweathermap.org/data/2.5/weather",
 )
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
