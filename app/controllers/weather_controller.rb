@@ -10,8 +10,9 @@ class WeatherController < ApplicationController
 
   def show
     weather_reading = @weather_service.fetch
+    data = JSON.parse(weather_reading.payload).merge!({ city: weather_reading.city, state: weather_reading.state, country: weather_reading.country })
 
-    render json: JSON.parse(weather_reading.payload), status: :ok
+    render json: data, status: :ok
   end
 
   private

@@ -1,5 +1,8 @@
-<div data-controller="weather" data-weather-providers="<%= Provider.all.to_json %>">
-  <select data-weather-target="providerSelect"></select>
+
+<div class="min-h-screen flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-900">
+<div data-controller="weather" data-weather-providers="<%= Provider.all.to_json %>"  class="w-full max-w-lg">
+  <select data-weather-target="providerSelect" class="mb-2 border p-2 rounded w-full bg-white dark:bg-gray-800
+                 text-gray-900 dark:text-gray-100"></select>
 
   <div class="relative mt-4">
     <input type="text"
@@ -7,7 +10,7 @@
            data-weather-target="search"
            data-action="input->weather#type"
            autocomplete="off"
-           class="border p-2 rounded w-full">
+           class="border p-2 rounded w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
 
     <ul data-weather-target="suggestions"
         class="absolute left-0 right-0 bg-white border rounded shadow
@@ -16,4 +19,6 @@
   </div>
 
   <div id="weather-card" class="mt-6"></div>
+  <div id="forecast-strip" class="mt-8"></div>
+</div>
 </div>
