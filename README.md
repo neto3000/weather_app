@@ -2,6 +2,9 @@
 
 Weather app 
 
+![image](https://github.com/user-attachments/assets/333624fb-f2c7-467e-8e98-121d4f478100)
+
+
 
 #### Usage
 
