@@ -1,3 +1,5 @@
+import { Chart, registerables } from "chart.js"
+Chart.register(...registerables)
 
 const kelvinToF = k => Math.round((k - 273.15) * 9 / 5 + 32);
 const toLocalTime = unix =>
@@ -57,6 +59,7 @@ export default class extends Controller {
       .then(json => {
         this.renderCard(json)          // existing main card
         this.renderForecast(json.daily.slice(0, 8)) // show next 8 days
+        this.renderHourlyChart(json.hourly.slice(0, 24))   // hourly chart
       })
   }
 
@@ -185,5 +188,26 @@ export default class extends Controller {
     document.querySelector("#forecast-strip").innerHTML = `
     <div class="flex gap-2 overflow-x-auto px-2">${cards}</div>
   `
+  }
+
+  renderHourlyChart(hours) {
+    if (!Array.isArray(hours) || hours.length === 0) return
+
+    const labels = hours.map(h =>
+      new Date(h.dt * 1000).toLocaleTimeString([], { hour: "2-digit" }))
+    const temps  = hours.map(h => kelvinToF(h.temp))     // or Math.round if imperial
+
+    const ctx = document.getElementById("hourly-chart").getContext("2d")
+    if (this.chart) this.chart.destroy()                 // avoid duplicates
+
+    this.chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [{ data: temps, tension: 0.3, borderWidth: 2, fill: false }]
+      },
+      options: { plugins: { legend: { display: false } },
+        scales:  { y: { ticks: { callback: v => `${v}°` } } } }
+    })
   }
 }
